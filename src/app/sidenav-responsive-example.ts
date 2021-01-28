@@ -9,7 +9,7 @@ import { ChangeDetectorRef, Component, OnDestroy } from "@angular/core";
 })
 export class SidenavResponsiveExample implements OnDestroy {
   mobileQuery: MediaQueryList;
-  openedMenu= true;
+  openedMenu = true;
 
   fillerNav = Array.from({ length: 10 }, (_, i) => `Nav Item ${i + 1}`);
 
@@ -29,11 +29,11 @@ export class SidenavResponsiveExample implements OnDestroy {
     this.mobileQuery = media.matchMedia("(max-width: 600px)");
     this.openedMenu = !this.mobileQuery;
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this._mobileQueryListener);
+    this.mobileQuery.addEventListener("change", this._mobileQueryListener);
   }
 
   ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this._mobileQueryListener);
+    this.mobileQuery.removeEventListener("change", this._mobileQueryListener);
   }
 
   shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h =>
